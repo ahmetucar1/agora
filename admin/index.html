@@ -165,6 +165,25 @@
       const categoryModeInput = document.getElementById('categoryMode');
       const newCategoryFields = document.getElementById('newCategoryFields');
       let editingProductId = null;
+      let apiWritable = false;
+
+      function getAppBasePath() {
+        const { hostname, pathname } = window.location;
+        if (hostname.endsWith('github.io')) {
+          const parts = pathname.split('/').filter(Boolean);
+          return parts.length ? `/${parts[0]}` : '';
+        }
+        return '';
+      }
+
+      const appBasePath = getAppBasePath();
+
+      function buildUrl(path) {
+        if (!path.startsWith('/')) {
+          path = `/${path}`;
+        }
+        return `${appBasePath}${path}`;
+      }
 
       function setStatus(message, type = '') {
         status.textContent = message;
@@ -184,6 +203,52 @@
         newCategoryFields.hidden = false;
         submitButton.textContent = 'Ürünü Ekle';
         cancelEditButton.hidden = true;
+      }
+
+      function syncAdminMode() {
+        const controls = form.querySelectorAll('input, select, button');
+        controls.forEach((control) => {
+          if (control === cancelEditButton) {
+            control.disabled = !apiWritable;
+            return;
+          }
+          control.disabled = !apiWritable;
+        });
+
+        productList.querySelectorAll('button').forEach((button) => {
+          button.disabled = !apiWritable;
+        });
+
+        categoryList.querySelectorAll('button').forEach((button) => {
+          button.disabled = !apiWritable;
+        });
+
+        if (!apiWritable) {
+          submitButton.textContent = 'Yonetim yalnizca local backend ile aktif';
+          cancelEditButton.hidden = true;
+        } else if (!editingProductId) {
+          submitButton.textContent = 'Ürünü Ekle';
+        }
+      }
+
+      async function fetchMenuData() {
+        try {
+          const response = await fetch(buildUrl('/api/products'), { cache: 'no-store' });
+          if (response.ok) {
+            apiWritable = true;
+            return await response.json();
+          }
+        } catch (error) {
+          console.warn('API unavailable, falling back to static JSON.', error);
+        }
+
+        const response = await fetch(buildUrl('/data/products.json'), { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error('Menü verisi yüklenemedi.');
+        }
+
+        apiWritable = false;
+        return await response.json();
       }
 
       function populateCategoryOptions(data) {
@@ -220,12 +285,12 @@
 
       async function loadProducts() {
         try {
-          const response = await fetch('/api/products');
-          const data = await response.json();
+          const data = await fetchMenuData();
           renderProducts(data);
           renderCategories(data);
           populateCategoryOptions(data);
-          setStatus('Ürün listesi güncellendi.', 'ok');
+          syncAdminMode();
+          setStatus(apiWritable ? 'Ürün listesi güncellendi.' : 'Ürünler yüklendi. Bu sayfa şu an sadece görüntüleme modunda.', 'ok');
         } catch (error) {
           console.error(error);
           setStatus('Ürün listesi yüklenemedi.', 'error');
@@ -290,8 +355,12 @@
         const productId = button.dataset.productId;
 
         if (action === 'edit') {
-          const response = await fetch('/api/products');
-          const data = await response.json();
+          if (!apiWritable) {
+            setStatus('Düzenleme için local backend üzerinden /admin açılmalı.', 'error');
+            return;
+          }
+
+          const data = await fetchMenuData();
           let selected = null;
 
           for (const category of data.categories || []) {
@@ -318,11 +387,16 @@
         }
 
         if (action === 'delete') {
+          if (!apiWritable) {
+            setStatus('Silme işlemi sadece local backend üzerinden kullanılabilir.', 'error');
+            return;
+          }
+
           const confirmed = window.confirm('Bu ürünü silmek istediğinize emin misiniz?');
           if (!confirmed) return;
 
           try {
-            const response = await fetch('/api/products/delete', {
+            const response = await fetch(buildUrl('/api/products/delete'), {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ id: productId })
@@ -344,11 +418,16 @@
         if (!button) return;
 
         const categoryName = button.dataset.categoryName;
+        if (!apiWritable) {
+          setStatus('Kategori silme işlemi sadece local backend üzerinden kullanılabilir.', 'error');
+          return;
+        }
+
         const confirmed = window.confirm(`${categoryName} kategorisini silmek istediğinize emin misiniz?`);
         if (!confirmed) return;
 
         try {
-          const response = await fetch('/api/categories/delete', {
+          const response = await fetch(buildUrl('/api/categories/delete'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name: categoryName })
@@ -367,10 +446,15 @@
 
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        if (!apiWritable) {
+          setStatus('Kaydetme işlemi için local backend üzerinden /admin açılmalı.', 'error');
+          return;
+        }
+
         setStatus('Ürün kaydediliyor…', '');
 
         const formData = new FormData(form);
-        const endpoint = editingProductId ? '/api/products/update' : '/api/products/add';
+        const endpoint = editingProductId ? buildUrl('/api/products/update') : buildUrl('/api/products/add');
 
         try {
           const response = await fetch(endpoint, {
@@ -397,6 +481,7 @@
         setStatus('Düzenleme iptal edildi.', '');
       });
 
+      syncAdminMode();
       loadProducts();
     </script>
   </body>
