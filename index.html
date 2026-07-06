@@ -523,7 +523,7 @@
               <img src="images/logo.PNG?w=156" alt="Agora Coffee" loading="eager" decoding="async" fetchpriority="high" />
             </div>
             <div>
-              <p class="kicker">Poster Menu</p>
+              <p class="kicker">Poster Menü</p>
               <h1>Agora Coffee</h1>
             </div>
           </div>
@@ -531,8 +531,8 @@
         </div>
         <div class="ticker">
           <div class="ticker-track" id="tickerTrack">
-            <span><strong>AGORA</strong> urunler yukleniyor...</span>
-            <span><strong>AGORA</strong> urunler yukleniyor...</span>
+            <span><strong>AGORA</strong> ürünler yükleniyor...</span>
+            <span><strong>AGORA</strong> ürünler yükleniyor...</span>
           </div>
         </div>
       </header>
@@ -614,7 +614,7 @@
         if (!tickerTrack) return;
         const picks = sampleProducts(8);
         if (!picks.length) {
-          tickerTrack.innerHTML = '<span><strong>AGORA</strong> menu yukleniyor...</span>';
+          tickerTrack.innerHTML = '<span><strong>AGORA</strong> menü yükleniyor...</span>';
           return;
         }
 
@@ -637,7 +637,7 @@
         detailScreen.classList.remove("active");
 
         if (!categories.length) {
-          homeScreen.innerHTML = '<div class="empty">Menu su an yuklenemedi. Lutfen biraz sonra tekrar deneyin.</div>';
+          homeScreen.innerHTML = '<div class="empty">Menü şu an yüklenemedi. Lütfen biraz sonra tekrar deneyin.</div>';
           return;
         }
 
@@ -649,8 +649,8 @@
               <img src="images/${lead.image}?w=760" alt="${lead.name}" loading="eager" decoding="async" fetchpriority="high" />
               <div class="hero-copy">
                 <h2>${lead.name}</h2>
-                <p>${(lead.products || []).length} urunle one cikiyor. Asagidaki kolajdan farkli bir kategori sec.</p>
-                <button class="lead-btn" data-id="${lead.id}">One Cikan Kategoriye Git</button>
+                <p>${(lead.products || []).length} ürünle öne çıkıyor. Aşağıdaki kolajdan farklı bir kategori seç.</p>
+                <button class="lead-btn" data-id="${lead.id}">Öne Çıkan Kategoriye Git</button>
               </div>
             </article>
           </section>
@@ -688,8 +688,8 @@
 
         detailScreen.innerHTML = `
           <div class="detail-screen-head">
-            <button class="back-btn" id="backBtn">Geri Don</button>
-            <p class="title">Menuye Donus</p>
+            <button class="back-btn" id="backBtn">Geri Dön</button>
+            <p class="title">Menüye Dönüş</p>
           </div>
           <section class="detail-wrap">
             <div class="detail-panel">
