@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: agora
+    runtime: python
+    buildCommand: python -m pip install --upgrade pip
+    startCommand: python server.py
+    healthCheckPath: /api/products
+    envVars:
+      - key: AGORA_STORAGE_DIR
+        value: /var/data/agora
+      - key: PYTHON_VERSION
+        value: 3.11.10
+    disk:
+      name: agora-data
+      mountPath: /var/data
+      sizeGB: 1

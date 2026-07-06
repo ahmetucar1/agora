@@ -2,6 +2,7 @@ import cgi
 import hashlib
 import json
 import mimetypes
+import os
 import re
 import subprocess
 import tempfile
@@ -14,8 +15,12 @@ from typing import Optional
 from urllib.parse import parse_qs, unquote, urlparse
 
 ROOT = Path(__file__).resolve().parent
-DATA_PATH = ROOT / "data" / "products.json"
+STORAGE_ROOT = Path(os.environ.get("AGORA_STORAGE_DIR", str(ROOT))).resolve()
+DATA_PATH = STORAGE_ROOT / "data" / "products.json"
+DEFAULT_DATA_PATH = ROOT / "data" / "products.json"
 ADMIN_DIR = ROOT / "admin"
+IMAGES_DIR = STORAGE_ROOT / "images"
+DEFAULT_IMAGES_DIR = ROOT / "images"
 IMAGE_CACHE_DIR = ROOT / ".cache" / "images"
 SUPPORTED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 MIN_RESIZE_WIDTH = 64
@@ -390,10 +395,10 @@ class AgoraHandler(BaseHTTPRequestHandler):
         return target.name
 
     def _next_image_path(self, stem: str, ext: str) -> Path:
-        target = ROOT / "images" / f"{stem}{ext}"
+        target = IMAGES_DIR / f"{stem}{ext}"
         counter = 1
         while target.exists():
-            target = ROOT / "images" / f"{stem}-{counter}{ext}"
+            target = IMAGES_DIR / f"{stem}-{counter}{ext}"
             counter += 1
         return target
 
@@ -475,9 +480,10 @@ class AgoraHandler(BaseHTTPRequestHandler):
         return {"categories": normalized}
 
     def _load_products(self):
-        if DATA_PATH.exists():
+        source_path = DATA_PATH if DATA_PATH.exists() else DEFAULT_DATA_PATH
+        if source_path.exists():
             try:
-                payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+                payload = json.loads(source_path.read_text(encoding="utf-8"))
             except json.JSONDecodeError:
                 return {"categories": []}
             return self._normalize_products_payload(payload)
@@ -531,17 +537,23 @@ class AgoraHandler(BaseHTTPRequestHandler):
 
     def _resolve_image_path(self, request_path: str) -> Optional[Path]:
         image_name = Path(request_path).name
-        images_dir = ROOT / "images"
-        if not image_name or not images_dir.exists():
+        if not image_name:
             return None
 
+        image_dirs = [IMAGES_DIR]
+        if DEFAULT_IMAGES_DIR != IMAGES_DIR:
+            image_dirs.append(DEFAULT_IMAGES_DIR)
+
         requested = unicodedata.normalize("NFC", image_name).casefold()
-        for candidate in images_dir.iterdir():
-            if not candidate.is_file():
+        for images_dir in image_dirs:
+            if not images_dir.exists():
                 continue
-            normalized = unicodedata.normalize("NFC", candidate.name).casefold()
-            if normalized == requested:
-                return candidate
+            for candidate in images_dir.iterdir():
+                if not candidate.is_file():
+                    continue
+                normalized = unicodedata.normalize("NFC", candidate.name).casefold()
+                if normalized == requested:
+                    return candidate
         return None
 
     def _requested_width(self, query_params) -> Optional[int]:
@@ -584,6 +596,7 @@ class AgoraHandler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    server = ThreadingHTTPServer(("0.0.0.0", 8000), AgoraHandler)
-    print("Agora server running on http://127.0.0.1:8000")
+    port = int(os.environ.get("PORT", "8000"))
+    server = ThreadingHTTPServer(("0.0.0.0", port), AgoraHandler)
+    print(f"Agora server running on http://127.0.0.1:{port}")
     server.serve_forever()
