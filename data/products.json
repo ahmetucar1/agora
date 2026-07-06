@@ -1,0 +1,316 @@
+{
+  "categories": [
+    {
+      "id": "sicak",
+      "name": "Sıcak İçecekler",
+      "image": "sicak-icecekler-v2.jpg",
+      "products": [
+        {
+          "name": "Çay",
+          "price": 10,
+          "image": "çay.jpg",
+          "id": "s-cak-i-ecekler-ay-bea904"
+        },
+        {
+          "name": "Türk Kahvesi",
+          "price": 15,
+          "image": "türkkahvesi.jpg",
+          "id": "s-cak-i-ecekler-t-rk-kahvesi-c0374a"
+        },
+        {
+          "name": "Kürt Kahvesi",
+          "price": 18,
+          "image": "kürtkahvesi.jpg",
+          "id": "s-cak-i-ecekler-k-rt-kahvesi-ba3cef"
+        },
+        {
+          "name": "Dibek Kahvesi",
+          "price": 20,
+          "image": "dibek.jpg",
+          "id": "s-cak-i-ecekler-dibek-kahvesi-2533af"
+        },
+        {
+          "name": "Damla Sakızlı",
+          "price": 22,
+          "image": "damlasakız.jpg",
+          "id": "s-cak-i-ecekler-damla-sak-zl-336532"
+        },
+        {
+          "name": "Menengiç Kahvesi",
+          "price": 20,
+          "image": "menengiç.jpg",
+          "id": "s-cak-i-ecekler-menengi-kahvesi-b89f2b"
+        }
+      ]
+    },
+    {
+      "id": "kahveler",
+      "name": "Kahveler",
+      "image": "kahveler.jpg",
+      "products": [
+        {
+          "name": "Espresso",
+          "price": 0,
+          "image": "espresso.jpg",
+          "id": "kahveler-espresso-a2c65f"
+        },
+        {
+          "name": "Double Espresso",
+          "price": 0,
+          "image": "doublespresso.jpg",
+          "id": "kahveler-double-espresso-126880"
+        },
+        {
+          "name": "Americano",
+          "price": 0,
+          "image": "americano.jpg",
+          "id": "kahveler-americano-0569b0"
+        },
+        {
+          "name": "White Chocolate Mocha",
+          "price": 0,
+          "image": "whitechocalatemocha.jpg",
+          "id": "kahveler-white-chocolate-mocha-2b3625"
+        },
+        {
+          "name": "Filtre Kahve",
+          "price": 0,
+          "image": "filtrekahve.jpg",
+          "id": "kahveler-filtre-kahve-99be59"
+        },
+        {
+          "name": "Sütlü Filtre Kahve",
+          "price": 0,
+          "image": "sütlüfiltrekahve.jpg",
+          "id": "kahveler-s-tl-filtre-kahve-e0c236"
+        },
+        {
+          "name": "Latte",
+          "price": 0,
+          "image": "latte.jpg",
+          "id": "kahveler-latte-0b7139"
+        },
+        {
+          "name": "Macchiato",
+          "price": 0,
+          "image": "macchiato.jpg",
+          "id": "kahveler-macchiato-627003"
+        },
+        {
+          "name": "Karamel Latte",
+          "price": 0,
+          "image": "karamellatte.jpg",
+          "id": "kahveler-karamel-latte-159a8b"
+        },
+        {
+          "name": "Mocha",
+          "price": 0,
+          "image": "mocha.jpg",
+          "id": "kahveler-mocha-6dd4c6"
+        },
+        {
+          "name": "Karamel Macchiato",
+          "price": 0,
+          "image": "karamelmacchiato.jpg",
+          "id": "kahveler-karamel-macchiato-508352"
+        },
+        {
+          "name": "Cappuccino",
+          "price": 0,
+          "image": "cappuccino.jpg",
+          "id": "kahveler-cappuccino-1f837a"
+        },
+        {
+          "id": "kahveler-kategori-test-r-n-10ad57",
+          "name": "Kategori Test Ürünü",
+          "price": 11.5,
+          "image": null
+        }
+      ]
+    },
+    {
+      "id": "milkshake",
+      "name": "Milkshake",
+      "image": "milkshake.jpg",
+      "products": [
+        {
+          "name": "Çilekli Milkshake",
+          "price": 0,
+          "image": "cileklimilkshake.jpg",
+          "id": "milkshake-ilekli-milkshake-7537f9"
+        },
+        {
+          "name": "Çikolatalı Milkshake",
+          "price": 0,
+          "image": "çikolatalımilkshake.jpg",
+          "id": "milkshake-ikolatal-milkshake-45017e"
+        },
+        {
+          "name": "Vanilyalı Milkshake",
+          "price": 0,
+          "image": "vanilyalımilkshake.jpg",
+          "id": "milkshake-vanilyal-milkshake-9a0940"
+        },
+        {
+          "name": "Muzlu Milkshake",
+          "price": 0,
+          "image": "muzlumilkshake.jpg",
+          "id": "milkshake-muzlu-milkshake-02616f"
+        }
+      ]
+    },
+    {
+      "id": "frozen",
+      "name": "Frozen",
+      "image": "frozen.jpg",
+      "products": [
+        {
+          "name": "Çilek",
+          "price": 0,
+          "image": "çilek.jpg",
+          "id": "frozen-ilek-f0ef33"
+        },
+        {
+          "name": "Orman Meyveli",
+          "price": 0,
+          "image": "ormanmeyveli.jpg",
+          "id": "frozen-orman-meyveli-e0a4b3"
+        },
+        {
+          "name": "Mango",
+          "price": 0,
+          "image": "mango.jpg",
+          "id": "frozen-mango-b57c9c"
+        },
+        {
+          "name": "Karpuz",
+          "price": 0,
+          "image": "karpuz.jpg",
+          "id": "frozen-karpuz-f92bd9"
+        },
+        {
+          "name": "Böğürtlen",
+          "price": 0,
+          "image": "böğürtlen.jpg",
+          "id": "frozen-b-rtlen-b354d3"
+        }
+      ]
+    },
+    {
+      "id": "iced",
+      "name": "Iced Coffee",
+      "image": "icedcoffe.jpg",
+      "products": [
+        {
+          "name": "Americano",
+          "price": 0,
+          "image": "americano.jpg",
+          "id": "iced-coffee-americano-e3d42f"
+        },
+        {
+          "name": "Latte",
+          "price": 0,
+          "image": "latte.jpg",
+          "id": "iced-coffee-latte-1ca3b1"
+        },
+        {
+          "name": "Karamel",
+          "price": 0,
+          "image": "icedkaramellatte.jpg",
+          "id": "iced-coffee-karamel-83cf88"
+        },
+        {
+          "name": "Chocolate Mocha",
+          "price": 0,
+          "image": "chocolatemocha.jpg",
+          "id": "iced-coffee-chocolate-mocha-837472"
+        },
+        {
+          "name": "White Chocolate Mocha",
+          "price": 0,
+          "image": "whitechocolatemocha.jpg",
+          "id": "iced-coffee-white-chocolate-mocha-f1fd64"
+        },
+        {
+          "name": "Karamel Macchiato",
+          "price": 0,
+          "image": "karamelmacchiato.jpg",
+          "id": "iced-coffee-karamel-macchiato-446abe"
+        }
+      ]
+    },
+    {
+      "id": "kokteyl",
+      "name": "Kokteyl",
+      "image": "kokteyl.jpg",
+      "products": [
+        {
+          "name": "İtalyan Sodası",
+          "price": 0,
+          "image": "italyansodası.jpg",
+          "id": "kokteyl-i-talyan-sodas-93c51b"
+        },
+        {
+          "name": "Cool Lime",
+          "price": 0,
+          "image": "coollime.jpg",
+          "id": "kokteyl-cool-lime-06a37d"
+        },
+        {
+          "name": "Hublot",
+          "price": 0,
+          "image": "hublot.jpg",
+          "id": "kokteyl-hublot-2ba443"
+        },
+        {
+          "name": "Mojito",
+          "price": 0,
+          "image": "mojito.jpg",
+          "id": "kokteyl-mojito-4eaa6e"
+        }
+      ]
+    },
+    {
+      "id": "dondurma",
+      "name": "Dondurma",
+      "image": "dondurma.jpg",
+      "products": [
+        {
+          "name": "Sade Sütlü",
+          "price": 0,
+          "id": "dondurma-sade-s-tl-a1c375"
+        },
+        {
+          "name": "Mango",
+          "price": 0,
+          "id": "dondurma-mango-b4f047"
+        },
+        {
+          "name": "Limon",
+          "price": 0,
+          "id": "dondurma-limon-a48d2d"
+        },
+        {
+          "name": "İtalyan Kremalı",
+          "price": 0,
+          "id": "dondurma-i-talyan-kremal-937a4d"
+        },
+        {
+          "name": "Şeftali",
+          "price": 0,
+          "id": "dondurma-eftali-f68579"
+        },
+        {
+          "name": "Kakaolu",
+          "price": 0,
+          "id": "dondurma-kakaolu-418fe1"
+        },
+        {
+          "name": "Böğürtlen",
+          "price": 0,
+          "id": "dondurma-b-rtlen-82bfbc"
+        }
+      ]
+    }
+  ]
+}
