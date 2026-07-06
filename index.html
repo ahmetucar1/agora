@@ -552,11 +552,28 @@
       const detailScreen = document.getElementById("detailScreen");
       const tickerTrack = document.getElementById("tickerTrack");
 
+      async function fetchMenuData() {
+        const endpoints = ["api/products", "data/products.json"];
+
+        for (const endpoint of endpoints) {
+          try {
+            const response = await fetch(endpoint, { cache: "no-store" });
+            if (!response.ok) {
+              continue;
+            }
+            return await response.json();
+          } catch (error) {
+            console.warn(`Menu request failed for ${endpoint}`, error);
+          }
+        }
+
+        throw new Error("Menu data could not be loaded.");
+      }
+
       async function loadMenu() {
         renderTicker();
         try {
-          const response = await fetch("/api/products");
-          const data = await response.json();
+          const data = await fetchMenuData();
           categories = Array.isArray(data.categories) ? data.categories : [];
         } catch (error) {
           console.error(error);
