@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agora Coffee - QR Poster</title>
+    <style>
+      :root {
+        --bg: #f7f1e8;
+        --ink: #1c1712;
+        --accent: #9a3d24;
+        --line: #d9c7b2;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 15% 15%, rgba(154, 61, 36, 0.14), transparent 30%),
+          radial-gradient(circle at 80% 85%, rgba(16, 123, 105, 0.14), transparent 32%),
+          var(--bg);
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--ink);
+        padding: 18px;
+      }
+
+      .poster {
+        width: min(760px, 100%);
+        background: #fffdf9;
+        border: 2px solid var(--line);
+        border-radius: 24px;
+        padding: 30px;
+        box-shadow: 0 18px 45px rgba(30, 22, 15, 0.18);
+        text-align: center;
+      }
+
+      .kicker {
+        margin: 0;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+      h1 {
+        margin: 8px 0 10px;
+        font-size: clamp(2rem, 4.8vw, 3.1rem);
+      }
+
+      .lead {
+        margin: 0 auto 18px;
+        max-width: 45ch;
+        font-size: 1.06rem;
+      }
+
+      .qr-wrap {
+        margin: 0 auto 14px;
+        width: min(360px, 80vw);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px;
+        background: #fff;
+      }
+
+      .qr-wrap img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .url {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      .note {
+        margin-top: 12px;
+        color: #6f5b49;
+        font-size: 0.9rem;
+      }
+
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+        }
+
+        .poster {
+          width: 100%;
+          border: 0;
+          border-radius: 0;
+          box-shadow: none;
+          page-break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="poster">
+      <p class="kicker">Agora Coffee</p>
+      <h1>Menüye Ulaşmak İçin Tara</h1>
+      <p class="lead">Telefon kameranla QR kodu okut, tüm içecek menüsünü anında aç.</p>
+
+      <div class="qr-wrap">
+        <img src="qr-menu-vercel.png" alt="Agora Coffee Menü QR" />
+      </div>
+
+      <p class="url">agoracoffee.vercel.app</p>
+      <p class="note">Bu afiş baskıya uygundur. A4 çıktıda net görünür.</p>
+    </article>
+  </body>
+</html>

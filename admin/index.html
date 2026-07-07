@@ -166,6 +166,7 @@
       const newCategoryFields = document.getElementById('newCategoryFields');
       let editingProductId = null;
       let apiWritable = false;
+      let apiTransport = 'multipart';
 
       function getAppBasePath() {
         const { hostname, pathname } = window.location;
@@ -229,13 +230,29 @@
         } else if (!editingProductId) {
           submitButton.textContent = 'Ürünü Ekle';
         }
+
+        const photoInput = document.getElementById('photo');
+        const categoryPhotoInput = document.getElementById('categoryPhoto');
+        if (apiTransport === 'json') {
+          photoInput.disabled = true;
+          categoryPhotoInput.disabled = true;
+          photoInput.title = 'Vercel modunda dosya yükleme kapalıdır.';
+          categoryPhotoInput.title = 'Vercel modunda dosya yükleme kapalıdır.';
+        } else {
+          photoInput.disabled = !apiWritable;
+          categoryPhotoInput.disabled = !apiWritable;
+          photoInput.title = '';
+          categoryPhotoInput.title = '';
+        }
       }
 
       async function fetchMenuData() {
         try {
           const response = await fetch(buildUrl('/api/products'), { cache: 'no-store' });
           if (response.ok) {
-            apiWritable = true;
+            const modeHeader = response.headers.get('x-agora-api-mode');
+            apiTransport = modeHeader === 'json' ? 'json' : 'multipart';
+            apiWritable = response.headers.get('x-agora-writable') !== 'false';
             return await response.json();
           }
         } catch (error) {
@@ -248,7 +265,20 @@
         }
 
         apiWritable = false;
+        apiTransport = 'multipart';
         return await response.json();
+      }
+
+      function formDataToJson(formData) {
+        const price = Number(String(formData.get('price') || '0').replace(',', '.'));
+        return {
+          product_id: String(formData.get('product_id') || ''),
+          category_mode: String(formData.get('category_mode') || 'existing'),
+          category: String(formData.get('category') || ''),
+          new_category_name: String(formData.get('new_category_name') || ''),
+          name: String(formData.get('name') || '').trim(),
+          price: Number.isFinite(price) ? price : 0,
+        };
       }
 
       function populateCategoryOptions(data) {
@@ -457,10 +487,18 @@
         const endpoint = editingProductId ? buildUrl('/api/products/update') : buildUrl('/api/products/add');
 
         try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            body: formData
-          });
+          const requestOptions = apiTransport === 'json'
+            ? {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formDataToJson(formData))
+              }
+            : {
+                method: 'POST',
+                body: formData
+              };
+
+          const response = await fetch(endpoint, requestOptions);
           const data = await response.json();
 
           if (!response.ok || !data.ok) {
