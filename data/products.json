@@ -13,31 +13,31 @@
         },
         {
           "name": "Türk Kahvesi",
-          "price": 40,
+          "price": 60,
           "image": "türkkahvesi.jpg",
           "id": "s-cak-i-ecekler-t-rk-kahvesi-c0374a"
         },
         {
           "name": "Kürt Kahvesi",
-          "price": 40,
+          "price": 60,
           "image": "kürtkahvesi.jpg",
           "id": "s-cak-i-ecekler-k-rt-kahvesi-ba3cef"
         },
         {
           "name": "Dibek Kahvesi",
-          "price": 40,
+          "price": 60,
           "image": "dibek.jpg",
           "id": "s-cak-i-ecekler-dibek-kahvesi-2533af"
         },
         {
           "name": "Damla Sakızlı",
-          "price": 40,
+          "price": 60,
           "image": "damlasakız.jpg",
           "id": "s-cak-i-ecekler-damla-sak-zl-336532"
         },
         {
           "name": "Menengiç Kahvesi",
-          "price": 40,
+          "price": 60,
           "image": "menengiç.jpg",
           "id": "s-cak-i-ecekler-menengi-kahvesi-b89f2b"
         }
@@ -277,37 +277,37 @@
       "products": [
         {
           "name": "Sade Sütlü",
-          "price": 40,
+          "price": 50,
           "id": "dondurma-sade-s-tl-a1c375"
         },
         {
           "name": "Mango",
-          "price": 40,
+          "price": 50,
           "id": "dondurma-mango-b4f047"
         },
         {
           "name": "Limon",
-          "price": 40,
+          "price": 50,
           "id": "dondurma-limon-a48d2d"
         },
         {
           "name": "İtalyan Kremalı",
-          "price": 40,
+          "price": 50,
           "id": "dondurma-i-talyan-kremal-937a4d"
         },
         {
           "name": "Şeftali",
-          "price": 40,
+          "price": 50,
           "id": "dondurma-eftali-f68579"
         },
         {
           "name": "Kakaolu",
-          "price": 40,
+          "price": 50,
           "id": "dondurma-kakaolu-418fe1"
         },
         {
           "name": "Böğürtlen",
-          "price": 40,
+          "price": 50,
           "id": "dondurma-b-rtlen-82bfbc"
         }
       ]
